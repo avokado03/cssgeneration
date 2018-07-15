@@ -1,0 +1,26 @@
+/**{
+    margin: 0;
+}
+div{
+    border: 1px solid black;
+}
+main{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+main div:last-child{
+    position: relative;
+}
+#visualBlock{
+    position: relative;
+    margin: 0 auto;
+    width: 100px;
+    height: 100px;
+    top:calc(50% - 100px / 2);
+}
+#prop label{
+    padding: 6px;
+}*/
+label,input{
+    margin: 10px;
+}

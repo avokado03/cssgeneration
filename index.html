@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Generation</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <header>
+        <p>CSS Generation</p>
+    </header>
+    <main>
+            <!--<div id="prop">
+                <p>Properties</p>
+                <label>Border: <input type="range"></label><br><hr>
+                <label>Border-radius: <input type="range"><br>
+                    <input type="radio" name="b-rType" value="solid"> solid <br>
+                    <input type="radio" name="b-rType" value="dashed"> dashed<br>
+                    <input type="radio" name="b-rType" value="dotted"> dotted<br>
+                </label><br><hr>
+                <label>Color: <input type="color"></label>
+            </div>
+            <div>
+                <div id="visualBlock">Simple Text</div>
+            </div>
+            <textarea></textarea> -->
+        <label>Hue <input type="number" id="h" min="0" max="360" required></label><br>
+        <label>Saturation <input type="number" id="s" min="0" max="1" required></label><br>
+        <label>Lightness <input type="number" id="l" min="0" max="1" required></label><br>
+        <button id="btn">Calculate</button><br>
+        <label>Color RGB <input type="text" id="result" readonly></label><br>
+        <textarea></textarea>
+
+    </main>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/js.js"></script>
+</body>
+</html>
