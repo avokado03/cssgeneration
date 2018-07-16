@@ -12,11 +12,11 @@ var HVLtoRGB=function HVLtoRGB (Hk,c,x,m) {
     return r;
 };
 $('#btn').click(function () {
-    var h=parseFloat($('#h').val());
-    var s=parseFloat($('#s').val());
-    var l=parseFloat($('#l').val());
+    var h=$('#h').val();
+    var s=$('#s').val();
+    var l=$('#l').val();
     var Hk=h/60;
-    var c=(1-Math.abs(2*l))*s;
+    var c=(1-Math.abs(2*l-1))*s;
     var x=c*(1-Math.abs(Hk%2-1));
     var m=l-c/2;
     var rgb= HVLtoRGB(Hk,c,x,m);
