@@ -1,4 +1,4 @@
-var HVLtoRGB=function HVLtoRGB (Hk,c,x,m) {
+/*var HVLtoRGB=function HVLtoRGB (Hk,c,x,m) {
     var r =[];
     if(Hk>=0 && Hk<1) r.push(c,x,0);
     else if(Hk>=1 && Hk<2) r.push(x,c,0);
@@ -24,4 +24,13 @@ $('#btn').click(function () {
     var textInp=$('#result');
     textInp.val(colorString);
     textInp.css('background-color','rgb('+colorString+')');
+});*/
+
+$('#btn').click(function () {
+    var chooseColorBlock=$('#colorChoose');
+    var visibility = chooseColorBlock.css('visibility');
+    if (visibility=='hidden')
+        chooseColorBlock.css('visibility','visible');
+    else
+        chooseColorBlock.css('visibility','hidden');
 });

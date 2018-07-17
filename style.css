@@ -1,26 +1,85 @@
-/**{
+@import url('https://fonts.googleapis.com/css?family=Questrial');
+
+*{
     margin: 0;
 }
-div{
-    border: 1px solid black;
+body{
+    background: #78a85d;
+}
+header{
+    background-color: #135c27;
+    font-size: 2em;
+    color:#e3e1e1;
+}
+p{
+    padding: 1% 1% 1% 4%;
+}
+header>p{
+    padding: 2%;
 }
 main{
     display: grid;
     grid-template-columns: 50% 50%;
+    font-size: 1.3em;
+    color: #001a1c;
+    margin: 1% auto;
 }
 main div:last-child{
     position: relative;
 }
+button{
+    border: 3px solid #001a1c;
+    box-shadow: 3px;
+    width: 5%;
+    height: 2em;
+    margin: 0.5%;
+}
+button,#visualBlock,#colorChoose{
+    background: #8bb0ba;
+}
+input[type = "text"]{
+    background-color: #e3e1e1;
+}
+/*https://bloggood.ru/vebmasteru/polzunok-v-html-oformlenie-i-vyvod-znacheniya.html/*/
+input[type=range]::-moz-range-track
+{
+    height: 5px;
+    background-color: #e3e1e1;
+}
+input[type=range]::-moz-range-thumb
+{
+    background-color: #e3e1e1;
+    border: none;
+    border-radius: 0;
+    width: 5px;
+    height: 25px;
+    cursor: pointer;
+}
+.questrial{
+    font-family: 'Questrial', sans-serif;
+}
 #visualBlock{
     position: relative;
     margin: 0 auto;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     top:calc(50% - 100px / 2);
+    border: 2px #001a1c solid;
+    border-radius: 15%;
+    text-align: center;
 }
-#prop label{
-    padding: 6px;
-}*/
-label,input{
-    margin: 10px;
+#visualBlock>p{
+    padding: 1%;
+}
+#colorChoose{
+    visibility: hidden;
+    position: relative;
+    display: grid;
+    grid-template-columns: 50% 10% 40%;
+    width: 40%;
+    height: auto;
+    margin: 0 auto;
+}
+#hsl input[type="text"], #rgb input[type="text"]{
+    width: 2.5em;
 }
