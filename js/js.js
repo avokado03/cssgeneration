@@ -34,3 +34,10 @@ $('#btn').click(function () {
     else
         chooseColorBlock.css('visibility','hidden');
 });
+
+$('#line').mousemove(function (e) {
+    var height = $(this).css('offsetHeight');
+    var offset = $(this).offset();
+    var Y = e.pageY - offset.top;
+    $('#ranger').css('top',Y+'px');
+});
