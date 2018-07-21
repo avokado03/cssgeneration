@@ -36,8 +36,25 @@ $('#btn').click(function () {
 });
 
 $('#line').mousemove(function (e) {
-    var height = $(this).css('offsetHeight');
+    var height = this.offsetHeight;
     var offset = $(this).offset();
     var Y = e.pageY - offset.top;
-    $('#ranger').css('top',Y+'px');
+    if(Y<height){
+        var hue=Math.round(Y/height*100*3.6);
+        $('#ranger').css('top',Y+'px');
+        $('#pallet').css('background-color','hsl('+hue+',100%,50%)');
+    }
+});
+$('#pallet').mousemove(function (e) {
+    var width = this.offsetWidth;
+    var height = this.offsetHeight;
+    var offset = $(this).offset();
+    var X = e.pageX - offset.left;
+    var Y = e.pageY - offset.top;
+    if (X<width && Y<height){
+       $('#curs').css({
+           "top": Y+"px",
+           "left": X+"px"
+       });
+    }
 });
