@@ -3,7 +3,6 @@ var hsl = {
     s: 0,
     l: 0
 };
-var rgb;
 var pallett = false;
 var hue = false;
 var colorPicker = $('#pallet');
@@ -15,7 +14,7 @@ Number.prototype.minmax = function (min, max) {
 };
 
 function ViewColor() {
-    rgb = HVLtoRGB(hsl.h,hsl.s,hsl.l);
+    var rgb = HVLtoRGB(hsl.h,hsl.s,hsl.l);
     var hex = '#';
     $('#h').val(hsl.h);
     $('#s').val(hsl.s);
@@ -29,7 +28,8 @@ function ViewColor() {
         hex+=item.toString(16);
     });
     $('#hexInp').val(hex);
-    $('#'+currentObject).css('background-color','hsl('+hsl.h+','+hsl.s+'%,'+hsl.l+'%)');
+
+    $('#'+currentObject).css('background-color','rgb('+rgb[0]+','+rgb[1]+','+rgb[2]+')');
 }
 
 function HVLtoRGB(h, s, l) {
