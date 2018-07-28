@@ -2,23 +2,34 @@ var hsl = {
     h: 0,
     s: 0,
     l: 0
-}
-
-// если число не в диапозоне возвращает минимальное/максимальное значение
-Number.prototype.minmax = function (min, max) {
-    return this < min ? min : (this > max ? max : this);
-}
-
-var palette = false; // true если пользователь зажал клавишу мыши над квадратом sl
-var hue = false; // true если пользователь зажал клавишу миши над полосой выбора hue
+};
+var rgb;
+var pallett = false;
+var hue = false;
 var colorPicker = $('#pallet');
 var huePicker = $('#line');
+var currentObject;
+
+Number.prototype.minmax = function (min, max) {
+    return this < min ? min : (this > max ? max : this);
+};
 
 function ViewColor() {
+    rgb = HVLtoRGB(hsl.h,hsl.s,hsl.l);
+    var hex = '#';
     $('#h').val(hsl.h);
     $('#s').val(hsl.s);
     $('#l').val(hsl.l);
-    var rgb = HVLtoRGB(260, 40, 10);
+
+    $('#r').val(rgb[0]);
+    $('#g').val(rgb[1]);
+    $('#b').val(rgb[2]);
+
+    rgb.forEach(function (item) {
+        hex+=item.toString(16);
+    });
+    $('#hexInp').val(hex);
+    $('#'+currentObject).css('background-color','hsl('+hsl.h+','+hsl.s+'%,'+hsl.l+'%)');
 }
 
 function HVLtoRGB(h, s, l) {
@@ -41,11 +52,12 @@ function HVLtoRGB(h, s, l) {
     return r;
 }
 
-$('#btn').click(function () {
+$('.btnColor').click(function () {
     $('#colorChoose').toggleClass('show');
+    currentObject=$(this).attr('id');
 });
 
-$('#line').mousemove(function (e) {
+huePicker.mousemove(function (e) {
     if (e.buttons == 1 && hue) {
         var height = this.offsetHeight;
         var offset = $(this).offset();
@@ -53,28 +65,33 @@ $('#line').mousemove(function (e) {
         if (Y < height) {
             hsl.h = Math.round(Y / height * 100 * 3.6);
             $('#ranger').css('top', Y + 'px');
-            $('#pallet').css('background-color', 'hsl(' + hsl.h + ',100%,50%)');
+            colorPicker.css('background-color', 'hsl(' + hsl.h + ',100%,50%)');
         }
         ViewColor();
     }
 });
 
-$('#line').mousedown(() => hue = true);
+huePicker.mousedown(function () {
+    hue=true;
+});
 
-$('#pallet').mousedown(() => palette = true);
+colorPicker.mousedown( function () {
+    pallett = true
+});
 
-$(window).mouseup(() => {
-    palette = false;
+$(window).mouseup( function () {
+    pallett = false;
     hue = false;
 });
 
 $(window).mousemove(function (e) {
+    var t,height,width,offset;
     if (e.buttons == 1) {
-        if (palette) {
-            var t = colorPicker;
-            var width = t[0].offsetWidth;
-            var height = t[0].offsetHeight;
-            var offset = t.offset();
+        if (pallett) {
+            t = colorPicker;
+            width = t[0].offsetWidth;
+            height = t[0].offsetHeight;
+            offset = t.offset();
             var X = e.pageX - offset.left;
             var Y = e.pageY - offset.top;
             X = X.minmax(0, width);
@@ -88,10 +105,10 @@ $(window).mousemove(function (e) {
             });
             ViewColor();
         } else if (hue) {
-            var t = huePicker;
-            var height = t[0].offsetHeight;
-            var offset = t.offset();
-            var Y = e.pageY - offset.top;
+            t = huePicker;
+            height = t[0].offsetHeight;
+            offset = t.offset();
+            Y = e.pageY - offset.top;
             Y = Y.minmax(0, height);
             hsl.h = Math.round(Y / height * 100 * 3.6);
             $('#ranger').css('top', Y + 'px');

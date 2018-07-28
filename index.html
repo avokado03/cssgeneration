@@ -11,6 +11,7 @@
     </header>
     <main>
         <div id="prop">
+            <p><label class="questrial">Background-color: <button class="btnColor" id="backColor"></button></label></p>
             <p><label class="questrial">Border:
                 <input type="range" min="0" max="999" value="2">
             </label></p>
@@ -19,7 +20,7 @@
                 <input type="radio" name="b-rType" value="dashed"> dashed<br>
                 <input type="radio" name="b-rType" value="dotted"> dotted
             </label></p>
-            <p><label class="questrial">Color:<button id="btn"></button></label></p>
+            <p><label class="questrial">Color:<button class="btnColor" id="color"></button></label></p>
         </div>
                 <div>
             <div id="visualBlock">
@@ -43,7 +44,7 @@
                 <label>L  <input type="text" id="l" readonly></label><br>
             </div>
             <div id = "rgb">
-                <label><input type="radio" name="chooseSchema" id="rgbChoose"> RGB</label><br>
+                <label><input type="radio" name="chooseSchema" id="rgbChoose" checked> RGB</label><br>
                 <label>R  <input type="text" id="r" readonly></label>
                 <label>G  <input type="text" id="g" readonly></label>
                 <label>B  <input type="text" id="b" readonly></label><br>
