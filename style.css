@@ -93,7 +93,7 @@ input[type=range]::-moz-range-thumb {
 
 #colorChoose {
     visibility: hidden;
-    position: relative;
+    position: fixed;
     display: grid;
     grid-template-columns: 30% 5% 1fr;
     grid-column-gap: 5%;

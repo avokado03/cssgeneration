@@ -30,11 +30,11 @@ function ViewColor() {
     });
     $('#hexInp').val(hex);
 
-    $('#'+currentObject).css('background-color','rgb('+rgb[0]+','+rgb[1]+','+rgb[2]+')');
+    $('#'+currentObject).css('background-color','hsl('+hsl[0]+','+hsl[1]+'%,'+hsl[2]+'%)');
 }
 
 function HSVtoRGB(h, s, v) {
-    var Hi = (h / 60)%6;
+    var Hi = Math.round((h / 60)%6);
     var Vmin = (100-s)*v/100;
     var a = (v-Vmin)*(h%60)/60;
     var Vinc = Vmin+a;
@@ -64,7 +64,7 @@ function HSVtoRGB(h, s, v) {
             break;
     }
     for (var i=0; i<r.length;i++){
-        r[i]*=2.55;
+        r[i]=Math.round(r[i]*=2.55);
     }
     return r;
 }
@@ -75,7 +75,7 @@ function HSVtoHSL(h,s,v) {
     var r = [];
     var L = (2 - s) * v / 2;
     var S = L&&L<1 ? s*v/(L<0.5 ? L*2 : 2-L*2) : s;
-    r.push(h,S,L);
+    r.push(h,Math.round(S*100),Math.round(L*100));
     return r;
 }
 
