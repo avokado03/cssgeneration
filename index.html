@@ -11,18 +11,28 @@
     </header>
     <main>
         <div id="prop">
-            <p><label class="questrial">Background-color: <button class="btnColor" id="backColor"></button></label></p>
+            <p><label class="questrial">Background-color:
+                <button class="btnColor" id="backColor"></button>
+                <span id="backC">#8bb0ba</span>
+            </label></p><br>
             <p><label class="questrial">Border-width:
-                <input type="range" min="0" max="999" value="2">
+                <input type="range" id="borderW" min="0" max="999" value="2">
+                <span id="bW">2px</span>
             </label></p>
-            <p><label class="questrial">Border-radius (%): <input type="range" min="0" max="100" value="15"></label></p>
+            <p><label class="questrial">Border-radius:
+                <input type="range" id = "borderR" min="0" max="100" value="15">
+                <span id="bR">15%</span>
+            </label></p>
             <p><label class="questrial">
                 Border-style:<br>
                 <input type="radio" name="b-rType" value="solid" checked> solid <br>
                 <input type="radio" name="b-rType" value="dashed"> dashed<br>
                 <input type="radio" name="b-rType" value="dotted"> dotted
+            </label></p><br>
+            <p><label class="questrial">Color:
+                <button  class="btnColor" id="color"></button>
+                <span id="col">#ffffff</span>
             </label></p>
-            <p><label class="questrial">Color:<button  class="btnColor" id="color"></button></label></p>
             <p><label class="questrial">Font-family: <button class="btnFont">Alice</button></label></p>
         </div>
         <div>
@@ -32,8 +42,8 @@
 
         </div>
         <p>
+            <textarea title="" readonly>Your code will be here! :) </textarea>
             <button class="questrial"  id="result">Generate</button><br>
-            <textarea title=""></textarea>
         </p>
     </main>
 
@@ -53,13 +63,13 @@
                 <label>L  <input type="text" id="l" readonly></label><br>
             </div>
             <div id = "rgb">
-                <label><input type="radio" name="chooseSchema" id="rgbChoose" checked> RGB</label><br>
+                <label><input type="radio" name="chooseSchema" id="rgbChoose"> RGB</label><br>
                 <label>R  <input type="text" id="r" readonly></label>
                 <label>G  <input type="text" id="g" readonly></label>
                 <label>B  <input type="text" id="b" readonly></label><br>
             </div>
             <div>
-                <label><input type="radio" name="chooseSchema" id="hexChoose"> HEX</label><br>
+                <label><input type="radio" name="chooseSchema" id="hexChoose" checked> HEX</label><br>
                 <label>HEX  <input type="text" id="hexInp"></label>
             </div>
         </div>
@@ -80,6 +90,7 @@
         <label id="Verdana"><input type="radio" name="font-family" value="Verdana">Verdana</label>
     </div>
     <!-- choose font end -->
+
     <script src="js/jquery-3.3.1.js"></script>
     <script src="js/js.js"></script>
 </body>

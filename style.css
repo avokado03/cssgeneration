@@ -24,7 +24,7 @@ header > p {
 
 main {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 0.8fr 1.2fr 1fr;
     font-size: 1.1em;
     color: #001a1c;
     margin: 1% auto;
@@ -37,13 +37,16 @@ main div:last-child {
 button {
     border: 3px solid #001a1c;
     box-shadow: 3px;
-    width: 5%;
+    width: 8%;
     height: 2em;
     margin: 0.5%;
 }
 
 textarea{
-    width: 45%;
+    height: 80%;
+    width: 90%;
+    margin: 0 2% 1% 0;
+    background-color: #e3e1e1;
 }
 
 button,
@@ -110,6 +113,7 @@ input[type=range]::-moz-range-thumb {
     height: auto;
     margin: 0 auto;
     padding: 1%;
+    border: 1px #e3e1e1 solid;
 }
 #fontChoose{
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -148,7 +152,6 @@ input[type=range]::-moz-range-thumb {
     position: absolute;
     background-color: white;
     top: 2%;
-
     border-radius: 2px;
 }
 
@@ -164,8 +167,9 @@ input[type=range]::-moz-range-thumb {
 .show {
     visibility: visible !important;
 }
+
 .btnFont,#result{
-    width: 20%;
+    width: 60%;
     font-size: 1em;
     margin: 2% 2% 2% 0;
 }

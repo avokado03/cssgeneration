@@ -10,6 +10,8 @@ var huePicker = $('#line');
 var colorChoose = $('#colorChoose');
 var fontChoose = $('#fontChoose');
 var currentObject;
+var hslStr, rgbStr;
+var hexStr = '#';
 
 Number.prototype.MinMax = function (min, max) {
     return this < min ? min : (this > max ? max : this);
@@ -18,7 +20,8 @@ Number.prototype.MinMax = function (min, max) {
 function ViewColor() {
     var hsl = HSVtoHSL(hsv.h,hsv.s,hsv.v);
     var rgb = HSVtoRGB(hsv.h,hsv.s,hsv.v);
-    var hex = '#';
+    hexStr='#';
+
     $('#h').val(hsl[0]);
     $('#s').val(hsl[1]);
     $('#l').val(hsl[2]);
@@ -27,12 +30,15 @@ function ViewColor() {
     $('#g').val(rgb[1]);
     $('#b').val(rgb[2]);
 
+    hslStr = 'hsl('+hsl[0]+','+hsl[1]+'%,'+hsl[2]+'%)';
+    rgbStr = 'rgb ('+rgb[0]+','+rgb[1]+','+rgb[2]+')';
     rgb.forEach(function (item) {
-        hex+=item.toString(16);
+        hexStr+=item.toString(16);
     });
-    $('#hexInp').val(hex);
+    $('#hexInp').val(hexStr);
 
-    $('#'+currentObject).css('background-color','hsl('+hsl[0]+','+hsl[1]+'%,'+hsl[2]+'%)');
+    $('input[type=radio][name=font-family]').change();
+    $('#'+currentObject).css('background-color',hslStr);
 }
 
 function HSVtoRGB(h, s, v) {
@@ -84,16 +90,14 @@ function HSVtoHSL(h,s,v) {
 $('.btnColor, .btnFont').click(function () {
     var elem = $(this);
     var chooseBlock;
-    var addX;
-    var addY = elem.offset().top+elem.height();
+    var addX = elem.offset().left+elem.outerWidth()-4;
+    var addY = elem.offset().top+elem.outerHeight()-4;
     if(elem.hasClass('btnColor')){
         chooseBlock=colorChoose;
         currentObject=elem.attr('id');
-        addX = elem.offset().left+(elem.width())*2;
     }
     else {
         chooseBlock=fontChoose;
-        addX = elem.offset().left+elem.width();
     }
     chooseBlock.css({
         'top':addY+'px',
@@ -162,4 +166,22 @@ $(window).mousemove(function (e) {
             ViewColor();
         }
     }
+});
+
+$('input[type=radio][name=chooseSchema]').change(function () {
+    var id=$(this).attr('id');
+    var span = $('#'+currentObject).next();
+    if(id=='hslChoose')
+        span.text(hslStr);
+    else if (id=='rgbChoose')
+        span.text(rgbStr);
+    else
+        span.text(hexStr);
+});
+
+$('input[type=radio][name=font-family]').change(function() {
+    var btn = $('.btnFont');
+    var value = this.value;
+    btn.css('font-family', value+', serif');
+    btn.html(value);
 });
