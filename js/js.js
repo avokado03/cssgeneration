@@ -63,6 +63,9 @@ function HSVtoRGB(h, s, v) {
             r.push(0,0,0);
             break;
     }
+    for (var i=0; i<r.length;i++){
+        r[i]*=2.55;
+    }
     return r;
 }
 
