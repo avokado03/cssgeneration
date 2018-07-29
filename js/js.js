@@ -1,7 +1,7 @@
-var hsl = {
+var hsv = {
     h: 0,
     s: 0,
-    l: 0
+    v: 0
 };
 var pallett = false;
 var hue = false;
@@ -9,16 +9,17 @@ var colorPicker = $('#pallet');
 var huePicker = $('#line');
 var currentObject;
 
-Number.prototype.minmax = function (min, max) {
+Number.prototype.MinMax = function (min, max) {
     return this < min ? min : (this > max ? max : this);
 };
 
 function ViewColor() {
-    var rgb = HVLtoRGB(hsl.h,hsl.s,hsl.l);
+    var hsl = HSVtoHSL(hsv.h,hsv.s,hsv.v);
+    var rgb = HSVtoRGB(hsv.h,hsv.s,hsv.v);
     var hex = '#';
-    $('#h').val(hsl.h);
-    $('#s').val(hsl.s);
-    $('#l').val(hsl.l);
+    $('#h').val(hsl[0]);
+    $('#s').val(hsl[1]);
+    $('#l').val(hsl[2]);
 
     $('#r').val(rgb[0]);
     $('#g').val(rgb[1]);
@@ -32,23 +33,46 @@ function ViewColor() {
     $('#'+currentObject).css('background-color','rgb('+rgb[0]+','+rgb[1]+','+rgb[2]+')');
 }
 
-function HVLtoRGB(h, s, l) {
-    s /= 100;
-    l /= 100;
-    var Hk = h / 60;
-    var c = (1 - Math.abs(2 * l - 1)) * s;
-    var x = c * (1 - Math.abs(Hk % 2 - 1));
-    var m = l - c / 2;
+function HSVtoRGB(h, s, v) {
+    var Hi = (h / 60)%6;
+    var Vmin = (100-s)*v/100;
+    var a = (v-Vmin)*(h%60)/60;
+    var Vinc = Vmin+a;
+    var Vdec = v-a;
     var r = [];
-    if (Hk >= 0 && Hk < 1) r.push(c, x, 0);
-    else if (Hk >= 1 && Hk < 2) r.push(x, c, 0);
-    else if (Hk >= 2 && Hk < 3) r.push(0, c, x);
-    else if (Hk >= 3 && Hk < 4) r.push(0, x, c);
-    else if (Hk >= 4 && Hk < 5) r.push(x, 0, c);
-    else r.push(c, 0, x);
-    for (var i = 0; i < r.length; i++) {
-        r[i] = Math.round((r[i] + m) * 255);
+    switch (Hi){
+        case 0:
+            r.push(v,Vinc,Vmin);
+            break;
+        case 1:
+            r.push(Vdec,v,Vmin);
+            break;
+        case 2:
+            r.push(Vmin,v,Vinc);
+            break;
+        case 3:
+            r.push(Vmin,Vdec,v);
+            break;
+        case 4:
+            r.push(Vmin,Vinc,v);
+            break;
+        case 5:
+            r.push(v,Vmin,Vdec);
+            break;
+        default:
+            r.push(0,0,0);
+            break;
     }
+    return r;
+}
+
+function HSVtoHSL(h,s,v) {
+    s/=100;
+    v/=100;
+    var r = [];
+    var L = (2 - s) * v / 2;
+    var S = L&&L<1 ? s*v/(L<0.5 ? L*2 : 2-L*2) : s;
+    r.push(h,S,L);
     return r;
 }
 
@@ -63,9 +87,9 @@ huePicker.mousemove(function (e) {
         var offset = $(this).offset();
         var Y = e.pageY - offset.top;
         if (Y < height) {
-            hsl.h = Math.round(Y / height * 100 * 3.6);
+            hsv.h = Math.round(Y / height * 100 * 3.6);
             $('#ranger').css('top', Y + 'px');
-            colorPicker.css('background-color', 'hsl(' + hsl.h + ',100%,50%)');
+            colorPicker.css('background-color', 'hsl(' + hsv.h + ',100%,50%)');
         }
         ViewColor();
     }
@@ -94,11 +118,11 @@ $(window).mousemove(function (e) {
             offset = t.offset();
             var X = e.pageX - offset.left;
             var Y = e.pageY - offset.top;
-            X = X.minmax(0, width);
-            Y = Y.minmax(0, height);
-            hsl.s = Math.round(X / width * 100);
-            hsl.l = 100 - Math.round(Y / height * 100);
-            X.minmax();
+            X = X.MinMax(0, width);
+            Y = Y.MinMax(0, height);
+            hsv.s = Math.round(X / width*100);
+            hsv.v = 100 - Math.round(Y / height*100);
+            X.MinMax();
             $('#curs').css({
                 "top": Y + "px",
                 "left": X + "px"
@@ -109,10 +133,10 @@ $(window).mousemove(function (e) {
             height = t[0].offsetHeight;
             offset = t.offset();
             Y = e.pageY - offset.top;
-            Y = Y.minmax(0, height);
-            hsl.h = Math.round(Y / height * 100 * 3.6);
+            Y = Y.MinMax(0, height);
+            hsv.h = Math.round(Y / height * 100 * 3.6);
             $('#ranger').css('top', Y + 'px');
-            $('#pallet').css('background-color', 'hsl(' + hsl.h + ',100%,50%)');
+            $('#pallet').css('background-color', 'hsl(' + hsv.h + ',100%,50%)');
             ViewColor();
         }
     }
