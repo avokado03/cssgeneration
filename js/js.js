@@ -7,6 +7,8 @@ var pallett = false;
 var hue = false;
 var colorPicker = $('#pallet');
 var huePicker = $('#line');
+var colorChoose = $('#colorChoose');
+var fontChoose = $('#fontChoose');
 var currentObject;
 
 Number.prototype.MinMax = function (min, max) {
@@ -79,9 +81,33 @@ function HSVtoHSL(h,s,v) {
     return r;
 }
 
+function setClickEvent(elem, chooseBlock) {
+    var addX;
+    var addY = elem.offset().top+elem.height();
+    if(elem.hasClass('btnColor')){
+        currentObject=elem.attr('id');
+        addX = elem.offset().left+(elem.width())*2;
+    }
+    else {
+        addX = elem.offset().left+elem.width();
+    }
+    chooseBlock.css({
+        'top':addY+'px',
+        'left':addX+'px'
+    });
+
+    chooseBlock.toggleClass('show');
+}
+
 $('.btnColor').click(function () {
-    $('#colorChoose').toggleClass('show');
-    currentObject=$(this).attr('id');
+    var btn = $(this);
+    setClickEvent(btn,colorChoose);
+
+});
+
+$('.btnFont').click(function () {
+    var btn=$(this);
+    setClickEvent(btn,fontChoose);
 });
 
 huePicker.mousemove(function (e) {

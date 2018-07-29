@@ -12,26 +12,31 @@
     <main>
         <div id="prop">
             <p><label class="questrial">Background-color: <button class="btnColor" id="backColor"></button></label></p>
-            <p><label class="questrial">Border:
+            <p><label class="questrial">Border-width:
                 <input type="range" min="0" max="999" value="2">
             </label></p>
-            <p><label class="questrial">Border-radius (%): <input type="range" min="0" max="100" value="15"><br>
+            <p><label class="questrial">Border-radius (%): <input type="range" min="0" max="100" value="15"></label></p>
+            <p><label class="questrial">
+                Border-style:<br>
                 <input type="radio" name="b-rType" value="solid" checked> solid <br>
                 <input type="radio" name="b-rType" value="dashed"> dashed<br>
                 <input type="radio" name="b-rType" value="dotted"> dotted
             </label></p>
-            <p><label class="questrial">Color:<button class="btnColor" id="color"></button></label></p>
+            <p><label class="questrial">Color:<button  class="btnColor" id="color"></button></label></p>
+            <p><label class="questrial">Font-family: <button class="btnFont">Alice</button></label></p>
         </div>
-                <div>
+        <div>
             <div id="visualBlock">
                 <p>Simple Text</p>
             </div>
+
         </div>
         <p>
-            <button class="questrial" id="result">Generate</button><br>
+            <button class="questrial"  id="result">Generate</button><br>
             <textarea title=""></textarea>
         </p>
     </main>
+
     <!-- сhoose color start -->
     <div id="colorChoose">
         <div id="pallet">
@@ -60,6 +65,21 @@
         </div>
     </div>
     <!-- choose color end -->
+
+    <!-- choose font start -->
+    <div id="fontChoose">
+        <label id="Alice"><input type="radio" name="font-family" value="Alice">Alice</label>
+        <label id="Arial"><input type="radio" name="font-family" value="Arial">Arial</label>
+        <label id="Georgia"><input type="radio" name="font-family" value="Georgia">Georgia</label>
+        <label id="Helvetica"><input type="radio" name="font-family" value="Helvetica">Helvetica</label>
+        <label id="Lato"><input type="radio" name="font-family" value="Lato">Lato</label>
+        <label id="OpenSans"><input type="radio" name="font-family" value="Open Sans">Open Sans</label>
+        <label id="SourceSerifPro"><input type="radio" name="font-family" value="Source Serif Pro">Source Serif Pro</label>
+        <label id="TimesNewRoman"><input type="radio" name="font-family" value="Times new Roman">Times new Roman</label>
+        <label id="Ubuntu"><input type="radio" name="font-family" value="Ubuntu">Ubuntu</label>
+        <label id="Verdana"><input type="radio" name="font-family" value="Verdana">Verdana</label>
+    </div>
+    <!-- choose font end -->
     <script src="js/jquery-3.3.1.js"></script>
     <script src="js/js.js"></script>
 </body>
