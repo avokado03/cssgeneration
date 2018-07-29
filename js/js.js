@@ -81,14 +81,18 @@ function HSVtoHSL(h,s,v) {
     return r;
 }
 
-function setClickEvent(elem, chooseBlock) {
+$('.btnColor, .btnFont').click(function () {
+    var elem = $(this);
+    var chooseBlock;
     var addX;
     var addY = elem.offset().top+elem.height();
     if(elem.hasClass('btnColor')){
+        chooseBlock=colorChoose;
         currentObject=elem.attr('id');
         addX = elem.offset().left+(elem.width())*2;
     }
     else {
+        chooseBlock=fontChoose;
         addX = elem.offset().left+elem.width();
     }
     chooseBlock.css({
@@ -97,17 +101,6 @@ function setClickEvent(elem, chooseBlock) {
     });
 
     chooseBlock.toggleClass('show');
-}
-
-$('.btnColor').click(function () {
-    var btn = $(this);
-    setClickEvent(btn,colorChoose);
-
-});
-
-$('.btnFont').click(function () {
-    var btn=$(this);
-    setClickEvent(btn,fontChoose);
 });
 
 huePicker.mousemove(function (e) {
