@@ -13,7 +13,7 @@
         <div id="prop">
             <p><label class="questrial">Background-color:
                 <button class="btnColor" id="backColor"></button>
-                <span id="backC">#8bb0ba</span>
+                <span id="backC" data-type="hslChoose">#8bb0ba</span>
             </label></p><br>
             <p><label class="questrial">Border-width:
                 <input type="range" id="borderW" min="0" max="999" value="2">
@@ -31,7 +31,7 @@
             </label></p><br>
             <p><label class="questrial">Color:
                 <button  class="btnColor" id="color"></button>
-                <span id="col">#ffffff</span>
+                <span id="col" data-type="hslChoose">#ffffff</span>
             </label></p>
             <p><label class="questrial">Font-family: <button class="btnFont">Alice</button></label></p>
         </div>
@@ -56,22 +56,24 @@
             <div id="ranger"></div>
         </div>
         <div>
-            <div id = hsl>
-                <label><input type="radio" name="chooseSchema" id="hslChoose"> HSL</label><br>
-                <label>H  <input type="text" id="h" readonly></label>
-                <label>S  <input type="text" id="s" readonly></label>
-                <label>L  <input type="text" id="l" readonly></label><br>
-            </div>
-            <div id = "rgb">
-                <label><input type="radio" name="chooseSchema" id="rgbChoose"> RGB</label><br>
-                <label>R  <input type="text" id="r" readonly></label>
-                <label>G  <input type="text" id="g" readonly></label>
-                <label>B  <input type="text" id="b" readonly></label><br>
-            </div>
-            <div>
-                <label><input type="radio" name="chooseSchema" id="hexChoose" checked> HEX</label><br>
-                <label>HEX  <input type="text" id="hexInp"></label>
-            </div>
+            <form id="colorForm">
+                <div id = hsl>
+                    <label><input type="radio" name="chooseSchema" id="hslChoose"> HSL</label><br>
+                    <label>H  <input type="text" id="h" readonly></label>
+                    <label>S  <input type="text" id="s" readonly></label>
+                    <label>L  <input type="text" id="l" readonly></label><br>
+                </div>
+                <div id = "rgb">
+                    <label><input type="radio" name="chooseSchema" id="rgbChoose"> RGB</label><br>
+                    <label>R  <input type="text" id="r" readonly></label>
+                    <label>G  <input type="text" id="g" readonly></label>
+                    <label>B  <input type="text" id="b" readonly></label><br>
+                </div>
+                <div>
+                    <label><input type="radio" name="chooseSchema" id="hexChoose" checked> HEX</label><br>
+                    <label>HEX  <input type="text" id="hexInp"></label>
+                </div>
+            </form>
         </div>
     </div>
     <!-- choose color end -->

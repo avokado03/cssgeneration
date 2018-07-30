@@ -13,11 +13,21 @@ var currentObject;
 var hslStr, rgbStr;
 var hexStr = '#';
 
-Number.prototype.MinMax = function (min, max) {
+Number.prototype.minMax = function (min, max) {
     return this < min ? min : (this > max ? max : this);
 };
 
-function ViewColor() {
+function recolor(span) {
+    var id = span.data('type');
+    if(id=='hslChoose')
+        span.text(hslStr);
+    else if (id=='rgbChoose')
+        span.text(rgbStr);
+    else
+        span.text(hexStr);
+}
+
+function viewColor() {
     var hsl = HSVtoHSL(hsv.h,hsv.s,hsv.v);
     var rgb = HSVtoRGB(hsv.h,hsv.s,hsv.v);
     hexStr='#';
@@ -37,7 +47,7 @@ function ViewColor() {
     });
     $('#hexInp').val(hexStr);
 
-    $('input[type=radio][name=font-family]').change();
+    recolor($('#'+currentObject).next());
     $('#'+currentObject).css('background-color',hslStr);
 }
 
@@ -117,7 +127,7 @@ huePicker.mousemove(function (e) {
             $('#ranger').css('top', Y + 'px');
             colorPicker.css('background-color', 'hsl(' + hsv.h + ',100%,50%)');
         }
-        ViewColor();
+        viewColor();
     }
 });
 
@@ -144,39 +154,34 @@ $(window).mousemove(function (e) {
             offset = t.offset();
             var X = e.pageX - offset.left;
             var Y = e.pageY - offset.top;
-            X = X.MinMax(0, width);
-            Y = Y.MinMax(0, height);
+            X = X.minMax(0, width);
+            Y = Y.minMax(0, height);
             hsv.s = Math.round(X / width*100);
             hsv.v = 100 - Math.round(Y / height*100);
-            X.MinMax();
+            X.minMax();
             $('#curs').css({
                 "top": Y + "px",
                 "left": X + "px"
             });
-            ViewColor();
+            viewColor();
         } else if (hue) {
             t = huePicker;
             height = t[0].offsetHeight;
             offset = t.offset();
             Y = e.pageY - offset.top;
-            Y = Y.MinMax(0, height);
+            Y = Y.minMax(0, height);
             hsv.h = Math.round(Y / height * 100 * 3.6);
             $('#ranger').css('top', Y + 'px');
             $('#pallet').css('background-color', 'hsl(' + hsv.h + ',100%,50%)');
-            ViewColor();
+            viewColor();
         }
     }
 });
 
 $('input[type=radio][name=chooseSchema]').change(function () {
-    var id=$(this).attr('id');
-    var span = $('#'+currentObject).next();
-    if(id=='hslChoose')
-        span.text(hslStr);
-    else if (id=='rgbChoose')
-        span.text(rgbStr);
-    else
-        span.text(hexStr);
+    var id = $('#colorForm')[0].chooseSchema.value;
+    var span = $('#'+currentObject).next().data('type',id);
+    recolor(span);
 });
 
 $('input[type=radio][name=font-family]').change(function() {
