@@ -12,6 +12,7 @@ var fontChoose = $('#fontChoose');
 var currentObject;
 var hslStr, rgbStr;
 var hexStr = '#';
+var block =$('#visualBlock');
 
 Number.prototype.minMax = function (min, max) {
     return this < min ? min : (this > max ? max : this);
@@ -19,12 +20,14 @@ Number.prototype.minMax = function (min, max) {
 
 function recolor(span) {
     var id = span.data('type');
-    if(id=='hslChoose')
+    if(id=='hslChoose'){
         span.text(hslStr);
-    else if (id=='rgbChoose')
+    }
+    else if (id=='rgbChoose'){
         span.text(rgbStr);
-    else
-        span.text(hexStr);
+    }
+    else{
+        span.text(hexStr);}
 }
 
 function viewColor() {
@@ -189,4 +192,9 @@ $('input[type=radio][name=font-family]').change(function() {
     var value = this.value;
     btn.css('font-family', value+', serif');
     btn.html(value);
+});
+
+$('.range').on('input',function () {
+    var value = this.value;
+    $(this).next().text(value);
 });
